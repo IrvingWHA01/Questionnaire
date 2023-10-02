@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #result.true {
+            color: #4caf50;
+        }
+
+        #result.false {
+            color: #f44336;
+        }
+    </style>
+    <script>
+        function checkAnswers() {
+            // Obtenir les réponses de l'utilisateur
+            var answers = document.querySelectorAll('input[name^="q"]');
+            var score = 0;
+
+            // Comparer les réponses de l'utilisateur avec les réponses correctes
+            if (answers[0].value === "false" && answers[0].checked) {
+                score++;
+            }
+
+            if (answers[1].value === "true" && answers[1].checked) {
+                score++;
+            }
+
+            if (answers[2].value === "true" && answers[2].checked) {
+                score++;
+            }
+
+            // Afficher le résultat
+            var resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = 'Votre score : ' + score + ' sur 3';
+            resultContainer.className = score === 3 ? 'true' : 'false';
+
+            // Afficher les réponses correctes et incorrectes
+            var answerSummary = document.getElementById('answer-summary');
+            answerSummary.innerHTML = `
+                Réponses correctes :
+                Question 1: Faux
+                Question 2: Vrai
+                Question 3: Vrai
+            `;
+        }
+    </script>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Quiz</h2>
+
+    <form>
+        <div>
+            <label for="q1">La construction de la tour Eiffel s'est achevée le 31 mars 1887.</label>
+            <input type="radio" name="q1" value="true"> Vrai
+            <input type="radio" name="q1" value="false"> Faux
+        </div>
+
+        <div>
+            <label for="q2">La foudre est vue avant d'être entendue car la lumière voyage plus vite que le son.</label>
+            <input type="radio" name="q2" value="true"> Vrai
+            <input type="radio" name="q2" value="false"> Faux
+        </div>
+
+        <div>
+            <label for="q3">La Cité du Vatican est un pays.</label>
+            <input type="radio" name="q3" value="true"> Vrai
+            <input type="radio" name="q3" value="false"> Faux
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Vérifier les réponses</button>
+    </form>
+
+    <div id="result"></div>
+    <p id="answer-summary"></p>
+</div>
+
+</body>
+</html>
